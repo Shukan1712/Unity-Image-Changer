@@ -43,11 +43,100 @@ public class cursorMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateSpherePositionBasedOnRotation();
+        if ("" + allVariables.pointingTechnique == "HAND")
+        {
+            UpdateSpherePositionBasedOnWristRotation();
+
+
+        }
+
+        else if ("" + allVariables.pointingTechnique == "HEAD")
+        {
+
+            UpdateSpherePositionBasedOnHeadRotation();
+        }
+
+
+       
     }
 
 
-    void UpdateSpherePositionBasedOnRotation()
+
+
+
+
+    void UpdateSpherePositionBasedOnHeadRotation()
+    {
+        // Get the current rotation of the GameObject (which matches the wrist rotation)
+        Quaternion rotation = allVariables.wristRotationScript.transform.rotation;
+
+        // Convert the rotation to Euler angles
+        Vector3 eulerAngles = rotation.eulerAngles;
+
+        // Adjust Euler angles to range from -180 to 180 degrees
+        float yaw = eulerAngles.y;   // Left/Right movement (x-axis position)
+        float roll = eulerAngles.z;  // Up/Down movement (y-axis position)
+        float pitch = eulerAngles.x;
+
+
+
+
+
+        // Define the angle ranges based on your specifications
+        float pitchMinAngle = -40f; // Left
+        float pitchMaxAngle = 5f;  // Right
+
+        float rollMinAngle = -35f;  // Down
+        float rollMaxAngle = 90f;   // Up
+
+        // Normalize the angles to a 0-1 range
+        float normalizedPitch = Mathf.InverseLerp(pitchMinAngle, pitchMaxAngle, pitch);
+        float normalizedRoll = Mathf.InverseLerp(rollMinAngle, rollMaxAngle, roll);
+
+        // Map the normalized values to position limits
+        float xPosition = Mathf.Lerp(-positionLimitX, positionLimitX, normalizedPitch);
+        float yPosition = Mathf.Lerp(-positionLimitY, positionLimitY, normalizedRoll);
+
+        // Optionally invert axes if movement is opposite
+        // xPosition *= -1;
+        // yPosition *= -1;
+
+        // Set the sphere's position relative to the plane
+        transform.position = planeTransform.position + new Vector3(xPosition, yPosition, 0f);
+
+
+
+        DebugText.text = "yaw:" + yaw + "\nroll:" + roll + "\nPitch:" + pitch;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// ////////////////////////////////////////
+    /// </summary>
+
+    void UpdateSpherePositionBasedOnWristRotation()
     {
         // Get the current rotation of the GameObject (which matches the wrist rotation)
         Quaternion rotation = allVariables.wristRotationScript.transform.rotation;

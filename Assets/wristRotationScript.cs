@@ -8,12 +8,14 @@ public class wristRotationScript : MonoBehaviour
 
     [Header("Ray Origin")]
     [SerializeField] public OVRSkeleton pointingHand;
-
+    [SerializeField]
+    public Transform headPosition;
 
 
 
 
     private Transform wristTransform;
+    private Transform headTransform;
 
 
 
@@ -26,7 +28,20 @@ public class wristRotationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCubePositionandRotationBasedonWrist();
+
+        if ("" + allVariables.pointingTechnique == "HAND")
+        {
+            UpdateCubePositionandRotationBasedOnWrist();
+
+
+        }
+
+        else if ("" + allVariables.pointingTechnique == "HEAD")
+        {
+
+             UpdateCubePositionandRotationBasedOnHead();
+        }
+
     }
 
 
@@ -39,10 +54,35 @@ public class wristRotationScript : MonoBehaviour
         return null;
     }
 
+    public Transform getheadTransform()
+    {
+        return headPosition;
+    }
 
 
 
-    void UpdateCubePositionandRotationBasedonWrist()
+    void UpdateCubePositionandRotationBasedOnHead()
+    {
+        headTransform = getheadTransform();
+
+        if (headTransform != null)
+        {
+
+            // Get the wrist's rotation
+            Quaternion headRotation = headTransform.rotation;
+
+            // Optionally, adjust the rotation if needed (e.g., apply an offset)
+
+            // Apply the wrist rotation to the current GameObject
+            transform.rotation = headRotation;
+
+            // If you also want to set the position based on the wrist
+            transform.position = headTransform.position;
+        }
+    }
+
+
+    void UpdateCubePositionandRotationBasedOnWrist()
     {
         wristTransform = getWristTransform();
 
@@ -61,5 +101,6 @@ public class wristRotationScript : MonoBehaviour
             transform.position = wristTransform.position;
         }
     }
+
 
 }
