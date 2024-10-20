@@ -84,7 +84,7 @@ public class cursorMovementScript : MonoBehaviour
 
         // Define the angle ranges based on your specifications
         float pitchMinAngle = -40f; // Left
-        float pitchMaxAngle = 5f;  // Right
+        float pitchMaxAngle = 0f;  // Right
 
         float rollMinAngle = -35f;  // Down
         float rollMaxAngle = 90f;   // Up

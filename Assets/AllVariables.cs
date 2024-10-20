@@ -6,6 +6,8 @@ public class AllVariables : MonoBehaviour
 {
     public wristRotationScript wristRotationScript;
     public cursorMovementScript cursorMovementScript;
+    public PlaceTarget placeTarget;
+    public MainInteraction mainInteraction;
 
     public enum PointingTechnique
     {
@@ -16,6 +18,9 @@ public class AllVariables : MonoBehaviour
     };
 
     public PointingTechnique pointingTechnique;
+    public GameObject Target;
+
+
 
     // Start is called before the first frame update
     void Start()

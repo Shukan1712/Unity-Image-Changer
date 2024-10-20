@@ -8,15 +8,14 @@ public class GestureDetection : ConfirmationDetection
 
     void Update()
     {
-        if (GameManager.Instance.pointingTechnique == GameManager.PointingTechnique.HAND)
+        
             confirmationHand = leftConfirmationHand;
-        else confirmationHand = rightConfirmationHand;
+       
     }
 
     public override bool ConfirmationDetected()
     {
-        if (GameManager.Instance.pointingTechnique == GameManager.PointingTechnique.HAND)
-        {
+    
             isPinching = confirmationHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
             if (!isHoldingGesture)
             {
@@ -24,16 +23,8 @@ public class GestureDetection : ConfirmationDetection
                 return isPinching;
             }
             else if (!isPinching) isHoldingGesture = false;
-        } else
-        {
-            isPinching = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
-            if (!isHoldingGesture)
-            {
-                isHoldingGesture = isPinching;
-                return isPinching;
-            }
-            else if (!isPinching) isHoldingGesture = false;
-        }
+         
+
         return false;
     }
 }
