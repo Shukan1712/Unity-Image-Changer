@@ -10,6 +10,8 @@ public class DrawProjection : MonoBehaviour
     public int numPoints = 5;
     public float timeBetweenPoints = 0.1f;
 
+    public AllVariables allVariables;
+
     public LayerMask CollidableLayes;
    // public DavidCustomGrabbingScript CGS;
 
@@ -36,13 +38,18 @@ public class DrawProjection : MonoBehaviour
 
     public void DoRaycast()
     {
+        Vector3 fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10; 
 
         Vector3 startingPoint = ControllerToFollow.transform.position;
+        if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
+        {
+             fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10;
+        }
 
-
-        Vector3 fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10;
-
-
+         if("" + allVariables.pointingTechnique == "RAYCASTHEAD")
+        {
+             fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
+        }
 
 
         RaycastHit hit;

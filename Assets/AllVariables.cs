@@ -8,13 +8,14 @@ public class AllVariables : MonoBehaviour
     public cursorMovementScript cursorMovementScript;
     public PlaceTarget placeTarget;
     public MainInteraction mainInteraction;
-    public DrawProjection drawProjection;
+    public DrawProjection drawProjectionWrist;
+    public DrawProjection drawProjectionHead;
 
     public enum PointingTechnique
     {
         HAND,
         CONTROLLER,
-        HEAD,
+        HEAD, RAYCASTWRIST, RAYCASTHEAD,
         EYES
     };
 

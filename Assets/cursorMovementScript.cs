@@ -56,13 +56,18 @@ public class cursorMovementScript : MonoBehaviour
             UpdateSpherePositionBasedOnHeadRotation();
         }
 
-        else if ("" + allVariables.pointingTechnique == "CONTROLLER")
+        else if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
         {
-            allVariables.drawProjection.DoRaycast();
+            allVariables.drawProjectionWrist.DoRaycast();
         
         }
 
-       
+        else if ("" + allVariables.pointingTechnique == "RAYCASTHEAD")
+        {
+            allVariables.drawProjectionHead.DoRaycast();
+
+        }
+
     }
 
 
@@ -160,9 +165,9 @@ public class cursorMovementScript : MonoBehaviour
 
         // Define the angle ranges based on your specifications
         float pitchMinAngle = -40f; // Left
-        float pitchMaxAngle = 5f;  // Right
+        float pitchMaxAngle = -5f;  // Right
 
-        float rollMinAngle = -35f;  // Down
+        float rollMinAngle = 15f;  // Down
         float rollMaxAngle = 90f;   // Up
 
         // Normalize the angles to a 0-1 range
