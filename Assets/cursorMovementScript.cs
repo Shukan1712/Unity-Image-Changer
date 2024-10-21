@@ -56,6 +56,11 @@ public class cursorMovementScript : MonoBehaviour
             UpdateSpherePositionBasedOnHeadRotation();
         }
 
+        else if ("" + allVariables.pointingTechnique == "CONTROLLER")
+        {
+            allVariables.drawProjection.DoRaycast();
+        
+        }
 
        
     }
