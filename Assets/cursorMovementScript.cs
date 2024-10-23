@@ -67,7 +67,16 @@ public class cursorMovementScript : MonoBehaviour
             allVariables.drawProjectionHead.DoRaycast();
 
         }
+        else if ("" + allVariables.pointingTechnique == "RAYCASTFINGER")
+        {
+            allVariables.drawProjectionFinger.DoRaycast();
 
+        }
+        else if ("" + allVariables.pointingTechnique == "RAYCASTARM")
+        {
+            allVariables.drawProjectionArm.DoRaycast();
+
+        }
     }
 
 

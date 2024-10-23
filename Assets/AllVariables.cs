@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class AllVariables : MonoBehaviour
 {
+ 
+    public DrawProjection drawProjectionWrist;
+    public DrawProjection drawProjectionHead;
+    public DrawProjection drawProjectionArm;
+    public DrawProjection drawProjectionFinger;
+
+
+
+
     public wristRotationScript wristRotationScript;
     public cursorMovementScript cursorMovementScript;
     public PlaceTarget placeTarget;
     public MainInteraction mainInteraction;
-    public DrawProjection drawProjectionWrist;
-    public DrawProjection drawProjectionHead;
+
+
+
+   
 
     public enum PointingTechnique
     {
         HAND,
         CONTROLLER,
-        HEAD, RAYCASTWRIST, RAYCASTHEAD,
+        HEAD, RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM,
         EYES
     };
 
@@ -33,6 +44,7 @@ public class AllVariables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+      
     }
 }
