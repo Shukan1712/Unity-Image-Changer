@@ -74,9 +74,16 @@ public class DrawProjection : MonoBehaviour
             fwd = arm.TransformDirection(Vector3.right) * 10;
         }
 
+        else if ("" + allVariables.pointingTechnique == "RAYCASTEYES")
+        {
+            startingPoint = ControllerToFollow.transform.position;
+            fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
+
+        }
+
         else
         {
-             fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10;
+             
 
              startingPoint = ControllerToFollow.transform.position;
             if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")

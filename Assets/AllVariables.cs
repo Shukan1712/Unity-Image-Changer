@@ -9,6 +9,7 @@ public class AllVariables : MonoBehaviour
     public DrawProjection drawProjectionHead;
     public DrawProjection drawProjectionArm;
     public DrawProjection drawProjectionFinger;
+    public DrawProjection drawProjectionEyes;
 
 
 
@@ -26,7 +27,7 @@ public class AllVariables : MonoBehaviour
     {
         HAND,
         CONTROLLER,
-        HEAD, RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM,
+        HEAD, RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES,
         EYES
     };
 
