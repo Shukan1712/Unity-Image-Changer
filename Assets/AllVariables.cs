@@ -18,8 +18,9 @@ public class AllVariables : MonoBehaviour
     public cursorMovementScript cursorMovementScript;
     public PlaceTarget placeTarget;
     public MainInteraction mainInteraction;
-
-
+    public FittsLawExperiment fittsLawExperiment;
+    public ExperimentController experimentController;
+    public FirebaseStuff firebaseStuff;
 
    
 
@@ -30,6 +31,11 @@ public class AllVariables : MonoBehaviour
         HEAD, RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES,
         EYES
     };
+
+
+    public string participantName = "Test";
+    public float timer = 0;
+    public int errorCount = 0;
 
     public PointingTechnique pointingTechnique;
     public GameObject Target;
@@ -45,7 +51,7 @@ public class AllVariables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
 
-      
     }
 }

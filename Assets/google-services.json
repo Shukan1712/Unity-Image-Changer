@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "523616341490",
-    "project_id": "ismar2024-multimodality",
-    "storage_bucket": "ismar2024-multimodality.appspot.com"
+    "project_number": "890317068072",
+    "firebase_url": "https://robertpointingproject-default-rtdb.firebaseio.com",
+    "project_id": "robertpointingproject",
+    "storage_bucket": "robertpointingproject.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:523616341490:android:59a87bf752c13d9c096f6b",
+        "mobilesdk_app_id": "1:890317068072:android:766a581dda7edfc5bfa21d",
         "android_client_info": {
           "package_name": "com.DefaultCompany.ISMAR2024Multimodal"
         }
@@ -15,7 +16,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC73AF2_hEIhBeBJFDElb2y7n3wW5yMZVI"
+          "current_key": "AIzaSyClmm-R_hJ2l6B7cluO7GEZLlka7xL68Sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890317068072:android:cb4d5adc42645d2dbfa21d",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.SamihaPointing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClmm-R_hJ2l6B7cluO7GEZLlka7xL68Sw"
         }
       ],
       "services": {

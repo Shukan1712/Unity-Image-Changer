@@ -9,6 +9,9 @@ public class MainInteraction : MonoBehaviour
     public GestureDetection gestureDetection;
     public int count = 0;
 
+    public GameObject currentTargetCollided;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,11 @@ public class MainInteraction : MonoBehaviour
         {
             Debug.Log("button pressed "+count);
             count++;
-            if (allVariables.placeTarget.IsCollidingWithCursor)
+            if (currentTargetCollided.GetComponent<TargetScript>().IsCollidingWithCursor)
             {
+                currentTargetCollided.GetComponent<TargetScript>().IsCollidingWithCursor = false;
+                allVariables.fittsLawExperiment.currentTargetNumber = -1;
+                //currentTargetCollided.GetComponent<TargetScript>().MychangeColor("#FFFFFF49"); //turn it back to white after selection
                 CorrectHIT();
                 
             }
@@ -46,6 +52,80 @@ public class MainInteraction : MonoBehaviour
 
     private void CorrectHIT()
     {
-       allVariables.placeTarget.UpdateTargetPositionandSize(1.0f, 0.40f);
+        //allVariables.placeTarget.UpdateTargetPositionandSize(1.0f, 0.40f);
+
+        if (allVariables.fittsLawExperiment.targetIndex != 0)
+        {
+            logData();
+        }
+
+
+        allVariables.experimentController.OnTargetSelected();
+      
+
     }
-}
+
+
+
+
+
+    private void logData()
+    {
+        System.DateTime epochStart = new System.DateTime(2024, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        double cur_time = (System.DateTime.UtcNow - epochStart).TotalMilliseconds;
+        long key = Convert.ToInt64(cur_time);
+
+        //string platform = "Physical";
+        string width = "" + "no";
+        string amplitude = "" + "no";
+        string movementTime = "" + allVariables.timer;
+       // string window_size = "" + "no";
+
+        string misclick = "" + allVariables.errorCount;
+        string technique = "" + allVariables.pointingTechnique;
+
+        string participant = allVariables.participantName;
+
+
+
+
+        //Vector3 OriginRotationVector = new Vector3(0, 0, 1);
+        //Vector3 raydirection = Optifwd;
+        //float angleInDegrees = Vector3.SignedAngle(OriginRotationVector, raydirection, Vector3.up);
+        //string ExtraHandrotation = "" + Math.Round(angleInDegrees, 2);
+
+        //Vector3 newraydirection = HeadPoint.transform.TransformDirection(Vector3.forward); ;
+        //float HeadDegrees = Vector3.SignedAngle(OriginRotationVector, newraydirection, Vector3.up);
+
+        //string ExtraHeadrotation = "" + Math.Round(HeadDegrees, 2);
+        //string ExtraAngularWidth = "" + WidthDict[WidthArr[DbVemsWidth]];
+        //string ExtraAngularAmplitude = "" + AmplitudeDict[distArr[DbVemsDistance]];
+        ////string logStr =platform +", "+DBparticipantID + ", " + width + ", " + amplitude + ", " + movementTime + ", " + continuousError + ", " + misclick + ", "+ ExtraHeadrotation+ ", "+ ExtraHandrotation;
+        //string DBIntearctionDistance = "" + DBplayerDistanceMultiplier;
+
+
+        DateTime theTime = DateTime.Now;
+        string datetime = theTime.ToString("yyyy-MM-dd\\THH:mm:ss\\Z");
+        string logStr = datetime + "," + participant + "," + technique + "," + amplitude + "," + width + "," + misclick + "," + movementTime;
+
+
+
+
+      
+            StartCoroutine(allVariables.firebaseStuff.LogDetails( logStr, "" + key));
+        allVariables.timer = 0;
+        allVariables.errorCount = 0;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    }
