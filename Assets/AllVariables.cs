@@ -36,9 +36,13 @@ public class AllVariables : MonoBehaviour
     public string participantName = "Test";
     public float timer = 0;
     public int errorCount = 0;
-
+    public float currentWidth;
+    public float currentAmplitude;
+    public GameObject currentTarget;
+    public GameObject cursor; 
     public PointingTechnique pointingTechnique;
     public GameObject Target;
+    public float effectiveWidth;
 
 
 

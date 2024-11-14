@@ -11,7 +11,7 @@ public class MainInteraction : MonoBehaviour
 
     public GameObject currentTargetCollided;
 
-
+    private string hitTarget;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,8 @@ public class MainInteraction : MonoBehaviour
             if (currentTargetCollided.GetComponent<TargetScript>().IsCollidingWithCursor)
             {
                 currentTargetCollided.GetComponent<TargetScript>().IsCollidingWithCursor = false;
+                effectiveWidth = Vector3.Distance(allVariables.cursor.transform.position, allVariables.currentTarget.transform.position);
+                hitTarget = ""+ allVariables.fittsLawExperiment.currentTargetNumber; 
                 allVariables.fittsLawExperiment.currentTargetNumber = -1;
                 //currentTargetCollided.GetComponent<TargetScript>().MychangeColor("#FFFFFF49"); //turn it back to white after selection
                 CorrectHIT();
@@ -39,11 +41,12 @@ public class MainInteraction : MonoBehaviour
 
 
             else
-            { 
-                
+            {
+                allVariables.errorCount =  allVariables.errorCount + 1;
+
                 //TODO: Error
-              //
-              //}
+                //
+                //}
 
             }
         }
@@ -54,11 +57,15 @@ public class MainInteraction : MonoBehaviour
     {
         //allVariables.placeTarget.UpdateTargetPositionandSize(1.0f, 0.40f);
 
-        if (allVariables.fittsLawExperiment.targetIndex != 0)
+        if (allVariables.fittsLawExperiment.targetIndex != 1)
         {
             logData();
         }
-
+        else
+        {
+            allVariables.timer = 0;
+            allVariables.errorCount = 0;
+        }
 
         allVariables.experimentController.OnTargetSelected();
       
@@ -66,7 +73,7 @@ public class MainInteraction : MonoBehaviour
     }
 
 
-
+    public float effectiveWidth;
 
 
     private void logData()
@@ -76,8 +83,9 @@ public class MainInteraction : MonoBehaviour
         long key = Convert.ToInt64(cur_time);
 
         //string platform = "Physical";
-        string width = "" + "no";
-        string amplitude = "" + "no";
+        string TargetNumber = hitTarget;
+        string width = "" + allVariables.currentWidth;
+        string amplitude = "" + allVariables.currentAmplitude;
         string movementTime = "" + allVariables.timer;
        // string window_size = "" + "no";
 
@@ -86,6 +94,8 @@ public class MainInteraction : MonoBehaviour
 
         string participant = allVariables.participantName;
 
+        // float effectiveDistance = Vector3.Distance(allVariables.cursor, allVariables.);
+        string EndpointDeviation = ""+effectiveWidth;
 
 
 
@@ -106,13 +116,13 @@ public class MainInteraction : MonoBehaviour
 
         DateTime theTime = DateTime.Now;
         string datetime = theTime.ToString("yyyy-MM-dd\\THH:mm:ss\\Z");
-        string logStr = datetime + "," + participant + "," + technique + "," + amplitude + "," + width + "," + misclick + "," + movementTime;
+        string logStr = datetime + "," + allVariables.fittsLawExperiment.targetIndex + "," + participant + "," + technique + "," + amplitude + "," + width + ","+ TargetNumber + "," + EndpointDeviation + ","+ misclick + "," + movementTime;
 
 
 
 
       
-            StartCoroutine(allVariables.firebaseStuff.LogDetails( logStr, "" + key));
+        StartCoroutine(allVariables.firebaseStuff.LogDetails( logStr, "" + key));
         allVariables.timer = 0;
         allVariables.errorCount = 0;
 

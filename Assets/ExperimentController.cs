@@ -110,7 +110,7 @@ public class ExperimentController : MonoBehaviour
 
        // fittsLawExperiment.targets[targetNumber].GetComponent<TargetScript>().MychangeColor("#FF000049");  //redcolor
 
-
+        //does nothing   GetNextTarget() does everything. 
 
         Debug.Log("Current Target: " + targetNumber);
     }

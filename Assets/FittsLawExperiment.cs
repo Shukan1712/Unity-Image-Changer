@@ -20,6 +20,10 @@ public class FittsLawExperiment : MonoBehaviour
 
     public int currentTargetNumber;
 
+    public AllVariables allvariables; 
+
+
+
     /// <summary>
     /// Arranges 9 targets around a circle centered at the given position.
     /// </summary>
@@ -29,6 +33,10 @@ public class FittsLawExperiment : MonoBehaviour
     public void ArrangeTargets(float amplitude, float width, Vector3 position)
     {
         float radius = amplitude / 2f;
+        allvariables.currentAmplitude = amplitude;
+        allvariables.currentWidth = width; 
+        
+
 
         for (int i = 0; i < 9; i++)
         {
@@ -62,6 +70,8 @@ public class FittsLawExperiment : MonoBehaviour
         else
         {
             currentTargetNumber = targetOrder[targetIndex];
+            allvariables.currentTarget = targets[currentTargetNumber];
+
             targetIndex++;
             return true;
         }
