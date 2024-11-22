@@ -21,7 +21,7 @@ public class AllVariables : MonoBehaviour
     public FittsLawExperiment fittsLawExperiment;
     public ExperimentController experimentController;
     public FirebaseStuff firebaseStuff;
-
+    public SFXplaying sfxPlaying;
    
 
     public enum PointingTechnique
@@ -40,10 +40,12 @@ public class AllVariables : MonoBehaviour
     public float currentAmplitude;
     public float currentDepth; 
     public GameObject currentTarget;
+    public GameObject previousTarget;
     public GameObject cursor; 
     public PointingTechnique pointingTechnique;
     public GameObject Target;
     public float effectiveWidth;
+   
 
 
 

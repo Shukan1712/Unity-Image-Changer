@@ -18,6 +18,11 @@ public class MainInteraction : MonoBehaviour
         
     }
 
+    string TargetPosition;
+    string PreviousTargetPosition;
+    string cursorPosition;
+    float actualAmplitude;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +37,22 @@ public class MainInteraction : MonoBehaviour
             {
                 currentTargetCollided.GetComponent<TargetScript>().IsCollidingWithCursor = false;
                 effectiveWidth = Vector3.Distance(allVariables.cursor.transform.position, allVariables.currentTarget.transform.position);
+                TargetPosition = getStringPosition(allVariables.currentTarget.transform.position);
+                cursorPosition = getStringPosition(allVariables.cursor.transform.position);
+
+
+                if (allVariables.fittsLawExperiment.targetIndex != 1)
+                {
+                    actualAmplitude = Vector3.Distance(allVariables.currentTarget.transform.position, allVariables.previousTarget.transform.position);
+                }
+                
+                
+                allVariables.previousTarget = allVariables.currentTarget;
+                    PreviousTargetPosition = getStringPosition(allVariables.previousTarget.transform.position);
+                    
+         
+
+
                 hitTarget = ""+ allVariables.fittsLawExperiment.currentTargetNumber; 
                 allVariables.fittsLawExperiment.currentTargetNumber = -1;
                 //currentTargetCollided.GetComponent<TargetScript>().MychangeColor("#FFFFFF49"); //turn it back to white after selection
@@ -42,8 +63,10 @@ public class MainInteraction : MonoBehaviour
 
             else
             {
-                allVariables.errorCount =  allVariables.errorCount + 1;
+                //effectiveWidth = Vector3.Distance(allVariables.cursor.transform.position, allVariables.currentTarget.transform.position);
 
+                allVariables.errorCount =  allVariables.errorCount + 1;
+                allVariables.sfxPlaying.PlayWrong();
                 //TODO: Error
                 //
                 //}
@@ -55,6 +78,7 @@ public class MainInteraction : MonoBehaviour
 
     private void CorrectHIT()
     {
+        allVariables.sfxPlaying.PlayRight();
         //allVariables.placeTarget.UpdateTargetPositionandSize(1.0f, 0.40f);
 
         if (allVariables.fittsLawExperiment.targetIndex != 1)
@@ -88,6 +112,10 @@ public class MainInteraction : MonoBehaviour
         string amplitude = "" + allVariables.currentAmplitude;
         string depth = "" + allVariables.currentDepth;
         string movementTime = "" + allVariables.timer;
+    
+
+
+
        // string window_size = "" + "no";
 
         string misclick = "" + allVariables.errorCount;
@@ -117,7 +145,7 @@ public class MainInteraction : MonoBehaviour
 
         DateTime theTime = DateTime.Now;
         string datetime = theTime.ToString("yyyy-MM-dd\\THH:mm:ss\\Z");
-        string logStr = datetime + "," + allVariables.fittsLawExperiment.targetIndex + "," + participant + "," + technique + "," + amplitude + "," + width+"," + depth + "," + TargetNumber + "," + EndpointDeviation + ","+ misclick + "," + movementTime;
+        string logStr = datetime + "," + allVariables.fittsLawExperiment.targetIndex + "," + participant + "," + technique + "," + amplitude + "," + width+"," + depth + "," + TargetNumber + "," + EndpointDeviation + ","+ misclick + "," + movementTime + "," + cursorPosition + "," + TargetPosition + "," + actualAmplitude + "," + PreviousTargetPosition;
 
 
 
@@ -133,10 +161,15 @@ public class MainInteraction : MonoBehaviour
 
 
 
+    string getStringPosition(Vector3 value)
+    {
 
-
-
-
-
+        return "" + value.x + " " + value.y + " " + value.z;
 
     }
+
+
+
+
+
+}

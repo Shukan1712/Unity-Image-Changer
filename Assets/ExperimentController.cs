@@ -7,6 +7,7 @@ using UnityEngine;
 public class ExperimentController : MonoBehaviour
 {
    public FittsLawExperiment fittsLawExperiment;
+    public AllVariables allVariables;
 
     public bool completed = false;
     public bool restart = false; 
@@ -103,6 +104,8 @@ public class ExperimentController : MonoBehaviour
                 }
             }
         }
+
+        allVariables.sfxPlaying.PlayFinished();
 
         Debug.Log("Experiment Complete");
     }
