@@ -34,7 +34,8 @@ public class FittsLawExperiment : MonoBehaviour
     {
         float radius = amplitude / 2f;
         allvariables.currentAmplitude = amplitude;
-        allvariables.currentWidth = width; 
+        allvariables.currentWidth = width;
+        allvariables.currentDepth = position.z;
         
 
 

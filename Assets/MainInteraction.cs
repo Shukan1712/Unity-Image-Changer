@@ -86,6 +86,7 @@ public class MainInteraction : MonoBehaviour
         string TargetNumber = hitTarget;
         string width = "" + allVariables.currentWidth;
         string amplitude = "" + allVariables.currentAmplitude;
+        string depth = "" + allVariables.currentDepth;
         string movementTime = "" + allVariables.timer;
        // string window_size = "" + "no";
 
@@ -116,7 +117,7 @@ public class MainInteraction : MonoBehaviour
 
         DateTime theTime = DateTime.Now;
         string datetime = theTime.ToString("yyyy-MM-dd\\THH:mm:ss\\Z");
-        string logStr = datetime + "," + allVariables.fittsLawExperiment.targetIndex + "," + participant + "," + technique + "," + amplitude + "," + width + ","+ TargetNumber + "," + EndpointDeviation + ","+ misclick + "," + movementTime;
+        string logStr = datetime + "," + allVariables.fittsLawExperiment.targetIndex + "," + participant + "," + technique + "," + amplitude + "," + width+"," + depth + "," + TargetNumber + "," + EndpointDeviation + ","+ misclick + "," + movementTime;
 
 
 
