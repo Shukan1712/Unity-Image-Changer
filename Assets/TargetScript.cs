@@ -36,6 +36,11 @@ public class TargetScript : MonoBehaviour
         {
             if (IsCollidingWithCursor)
             {
+                if (allVariables.initialTouchDone == false)
+                {
+                    allVariables.initialTouchDone = true;
+                }
+
 
                 MychangeColor(greenColorCode);
             }

@@ -26,10 +26,9 @@ public class AllVariables : MonoBehaviour
 
     public enum PointingTechnique
     {
-        HAND,
-        CONTROLLER,
-        HEAD, RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES,
-        EYES
+        
+       RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES
+    
     };
 
 
@@ -45,7 +44,8 @@ public class AllVariables : MonoBehaviour
     public PointingTechnique pointingTechnique;
     public GameObject Target;
     public float effectiveWidth;
-   
+    public bool initialTouchDone;
+    public float initialTouchTimer;
 
 
 
@@ -59,6 +59,9 @@ public class AllVariables : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-
+        if (initialTouchDone == false)
+        { 
+            initialTouchTimer += Time.deltaTime;
+        }
     }
 }
