@@ -27,7 +27,7 @@ public class AllVariables : MonoBehaviour
     public enum PointingTechnique
     {
         
-       RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES
+       RAYCASTWRIST, RAYCASTHEAD, RAYCASTFINGER, RAYCASTARM, RAYCASTEYES, DirectTouch
     
     };
 

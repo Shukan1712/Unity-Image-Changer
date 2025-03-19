@@ -52,7 +52,7 @@ public class FittsLawExperiment : MonoBehaviour
             targets[i].transform.position = new Vector3(x, y, z);
 
             // Set the size of each target
-            targets[i].transform.localScale = new Vector3(width, width, 0.1f);
+            targets[i].transform.localScale = new Vector3(width, width, 0.001f);
         }
     }
 

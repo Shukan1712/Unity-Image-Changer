@@ -13,17 +13,15 @@ public class ExperimentController : MonoBehaviour
     public bool restart = false; 
 
     // Arrays for amplitudes and widths
-    public float[] amplitudeArray = { 1.5f, 2.5f, 3.5f  };
-    public float[] widthArray = { 0.2f,0.3f, 0.4f  };
+    public float[] amplitudeArray = { 0.1f, 0.2f, 0.05f };
+    public float[] widthArray = { 0.01f,0.02f, 0.005f  };
     public GameObject screen;
     // List of center points
     private List<Vector3> centerPoints = new List<Vector3>
     {
     
-         new Vector3(0.47f, 2.2f, 2f),
-        new Vector3(0.47f, 2.2f, 6f),
-
-        new Vector3(0.47f, 2.2f, 10f)
+         new Vector3(0.47f, 0f, 0.30f),
+     
 
     };
 

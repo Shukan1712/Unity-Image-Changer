@@ -18,6 +18,9 @@ public class MainInteraction : MonoBehaviour
         
     }
 
+
+    public bool directtouch = false;
+
     string TargetPosition;
     string PreviousTargetPosition;
     string cursorPosition;
@@ -29,7 +32,7 @@ public class MainInteraction : MonoBehaviour
 
         //if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         
-        if(gestureDetection.ConfirmationDetected())
+        if(gestureDetection.ConfirmationDetected() || directtouch) //remember to delete the error. or change the error
         {
             Debug.Log("button pressed "+count);
             count++;

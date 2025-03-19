@@ -28,8 +28,8 @@ public class DrawProjection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
 
+        Cursor.transform.position = GetIndexFingerTransform().position;
 
     }
 
@@ -55,59 +55,59 @@ public class DrawProjection : MonoBehaviour
     }
 
 
-    public void DoRaycast()
-    {
-        Vector3 startingPoint = Vector3.zero;
-        Vector3 fwd = Vector3.zero;
+    //public void DoRaycast()
+    //{
+    //    Vector3 startingPoint = Vector3.zero;
+    //    Vector3 fwd = Vector3.zero;
 
 
-        if ("" + allVariables.pointingTechnique == "RAYCASTFINGER")
-        {
-            Transform indexFinger = GetIndexFingerTransform();
-            startingPoint = indexFinger.position;
-            fwd = indexFinger.TransformDirection(Vector3.right) * 10;
-        }
-        else if ("" + allVariables.pointingTechnique == "RAYCASTARM")
-        {
-            Transform arm = GetArmTransform();
-            startingPoint = arm.position;
-            fwd = arm.TransformDirection(Vector3.right) * 10;
-        }
+    //    if ("" + allVariables.pointingTechnique == "RAYCASTFINGER")
+    //    {
+    //        Transform indexFinger = GetIndexFingerTransform();
+    //        startingPoint = indexFinger.position;
+    //        fwd = indexFinger.TransformDirection(Vector3.right) * 10;
+    //    }
+    //    else if ("" + allVariables.pointingTechnique == "RAYCASTARM")
+    //    {
+    //        Transform arm = GetArmTransform();
+    //        startingPoint = arm.position;
+    //        fwd = arm.TransformDirection(Vector3.right) * 10;
+    //    }
 
-        else if ("" + allVariables.pointingTechnique == "RAYCASTEYES")
-        {
-            startingPoint = ControllerToFollow.transform.position;
-            fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
+    //    else if ("" + allVariables.pointingTechnique == "RAYCASTEYES")
+    //    {
+    //        startingPoint = ControllerToFollow.transform.position;
+    //        fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
 
-        }
+    //    }
 
-        else
-        {
+    //    else
+    //    {
              
 
-             startingPoint = ControllerToFollow.transform.position;
-            if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
-            {
-                fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10;
-            }
+    //         startingPoint = ControllerToFollow.transform.position;
+    //        if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
+    //        {
+    //            fwd = ControllerToFollow.transform.TransformDirection(Vector3.left) * 10;
+    //        }
 
-            if ("" + allVariables.pointingTechnique == "RAYCASTHEAD")
-            {
-                fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
-            }
-        }
+    //        if ("" + allVariables.pointingTechnique == "RAYCASTHEAD")
+    //        {
+    //            fwd = ControllerToFollow.transform.TransformDirection(Vector3.forward) * 10;
+    //        }
+    //    }
 
-        RaycastHit hit;
-        if (Physics.Raycast(startingPoint, fwd, out hit, 100000f, CollidableLayes))
-        {
-
-
-            Cursor.transform.position = hit.point;
-        }
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(startingPoint, fwd, out hit, 100000f, CollidableLayes))
+    //    {
 
 
+    //        Cursor.transform.position = hit.point;
+    //    }
 
-    }
+
+
+    //}
 }
 
 

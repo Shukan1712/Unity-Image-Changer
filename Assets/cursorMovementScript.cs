@@ -43,46 +43,46 @@ public class cursorMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ("" + allVariables.pointingTechnique == "HAND")
-        {
-            UpdateSpherePositionBasedOnWristRotation();
+        //if ("" + allVariables.pointingTechnique == "HAND")
+        //{
+        //    UpdateSpherePositionBasedOnWristRotation();
 
 
-        }
+        //}
 
-        else if ("" + allVariables.pointingTechnique == "HEAD")
-        {
+        //else if ("" + allVariables.pointingTechnique == "HEAD")
+        //{
 
-            UpdateSpherePositionBasedOnHeadRotation();
-        }
+        //    UpdateSpherePositionBasedOnHeadRotation();
+        //}
 
-        else if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
-        {
-            allVariables.drawProjectionWrist.DoRaycast();
+        //else if ("" + allVariables.pointingTechnique == "RAYCASTWRIST")
+        //{
+        //    allVariables.drawProjectionWrist.DoRaycast();
         
-        }
+        //}
 
-        else if ("" + allVariables.pointingTechnique == "RAYCASTHEAD")
-        {
-            allVariables.drawProjectionHead.DoRaycast();
+        //else if ("" + allVariables.pointingTechnique == "RAYCASTHEAD")
+        //{
+        //    allVariables.drawProjectionHead.DoRaycast();
 
-        }
-        else if ("" + allVariables.pointingTechnique == "RAYCASTFINGER")
-        {
-            allVariables.drawProjectionFinger.DoRaycast();
+        //}
+        //else if ("" + allVariables.pointingTechnique == "RAYCASTFINGER")
+        //{
+        //    allVariables.drawProjectionFinger.DoRaycast();
 
-        }
-        else if ("" + allVariables.pointingTechnique == "RAYCASTARM")
-        {
-            allVariables.drawProjectionArm.DoRaycast();
+        //}
+        //else if ("" + allVariables.pointingTechnique == "RAYCASTARM")
+        //{
+        //    allVariables.drawProjectionArm.DoRaycast();
 
-        }
+        //}
 
-        else if ("" + allVariables.pointingTechnique == "RAYCASTEYES")
-        {
-            allVariables.drawProjectionEyes.DoRaycast();
+        //else if ("" + allVariables.pointingTechnique == "RAYCASTEYES")
+        //{
+        //    allVariables.drawProjectionEyes.DoRaycast();
 
-        }
+        //}
     }
 
 
