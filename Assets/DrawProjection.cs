@@ -45,7 +45,7 @@ public class DrawProjection : MonoBehaviour
     }
 
 
-    private Transform GetArmTransform()
+    public Transform GetArmTransform()
     {
         foreach (var b in pointingHand.Bones)
         {

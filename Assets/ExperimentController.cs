@@ -9,6 +9,9 @@ public class ExperimentController : MonoBehaviour
    public FittsLawExperiment fittsLawExperiment;
     public AllVariables allVariables;
 
+
+    public DrawProjection drawProjectionFinger;
+
     public bool completed = false;
     public bool restart = false; 
 
@@ -75,9 +78,23 @@ public class ExperimentController : MonoBehaviour
             {
                 foreach (float width in widthArray)
                 {
-                    // Arrange the targets around the circle
+                    
+                  
                     fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
-                    screen.transform.position = new Vector3(screen.transform.position.x, screen.transform.position.y, centerPosition.z);
+
+
+
+
+
+
+
+                    screen.transform.position = drawProjectionFinger.GetArmTransform().position;
+
+
+
+
+
+
                     // Reset the target selection sequence
                     fittsLawExperiment.ResetTargetSequence();
 
