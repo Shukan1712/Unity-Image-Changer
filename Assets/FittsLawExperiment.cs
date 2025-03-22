@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -30,13 +31,16 @@ public class FittsLawExperiment : MonoBehaviour
     /// <param name="amplitude">The diameter of the circle.</param>
     /// <param name="width">The size (width) of each target.</param>
     /// <param name="position">The center position of the circle.</param>
-    public void ArrangeTargets(float amplitude, float width, Vector3 position)
+    public async  void ArrangeTargets(float amplitude, float width, Vector3 position)
     {
 
         // we need to detach all children from   the current gameobject   (if any)
         // Detach all children (if any)
         DetachAllChildren();
 
+
+
+        
         float radius = amplitude / 2f;
         allvariables.currentAmplitude = amplitude;
         allvariables.currentWidth = width;
@@ -60,7 +64,7 @@ public class FittsLawExperiment : MonoBehaviour
             targets[i].transform.localScale = new Vector3(width, width, 0.001f);
         }
 
-
+        await Task.Delay(1000);
         // we need to attach all targets as a children of the current gameobject  
         AttachTargetsAsChildren();
     }

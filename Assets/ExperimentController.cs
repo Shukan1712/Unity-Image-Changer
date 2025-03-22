@@ -13,7 +13,8 @@ public class ExperimentController : MonoBehaviour
     public DrawProjection drawProjectionFinger;
 
     public bool completed = false;
-    public bool restart = false; 
+    public bool restart = false;
+    public bool work = false;
 
     // Arrays for amplitudes and widths
     public float[] amplitudeArray = { 0.1f, 0.2f, 0.05f };
@@ -23,7 +24,7 @@ public class ExperimentController : MonoBehaviour
     private List<Vector3> centerPoints = new List<Vector3>
     {
     
-         new Vector3(0.47f, 0f, 0.30f),
+         new Vector3(0f, 0f, 0f),
      
 
     };
@@ -42,9 +43,27 @@ public class ExperimentController : MonoBehaviour
         {
             restart = false;
             StartCoroutine(RunExperiment());
+            
+        }
+
+        if (work == true)
+        {
+
+            Vector3 newposition = drawProjectionFinger.GetArmTransform().position;
+
+
+            screen.transform.position = new Vector3(newposition.x, newposition.y+0.035f, newposition.z); //sukhan change 
+
+
+
+
 
         }
+
+
+
     }
+
 
 
     void Start()
@@ -78,17 +97,20 @@ public class ExperimentController : MonoBehaviour
             {
                 foreach (float width in widthArray)
                 {
-                    
-                  
+                    work = false;
+                    //yield return new WaitForSeconds(1f);
+                    screen.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    //screen.transform.position = new Vector3(0.47f, 0,0);
+                    screen.transform.position = new Vector3(0f, 0f, 0f);
                     fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
+                    yield return new WaitForSeconds(2f);
+
+                    screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                    //yield return new WaitForSeconds(1f);
+                    work = true;
 
 
-
-
-
-
-
-                    screen.transform.position = drawProjectionFinger.GetArmTransform().position;
+                   
 
 
 

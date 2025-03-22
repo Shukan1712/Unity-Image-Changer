@@ -10,6 +10,7 @@ public class DrawProjection : MonoBehaviour
     public int numPoints = 5;
     public float timeBetweenPoints = 0.1f;
     public OVRSkeleton pointingHand;
+    public OVRSkeleton LeftHand;
     public AllVariables allVariables;
 
     public LayerMask CollidableLayes;
@@ -47,7 +48,7 @@ public class DrawProjection : MonoBehaviour
 
     public Transform GetArmTransform()
     {
-        foreach (var b in pointingHand.Bones)
+        foreach (var b in LeftHand.Bones)
         {
             if (b.Id == OVRSkeleton.BoneId.Hand_ForearmStub) return b.Transform;
         }

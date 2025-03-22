@@ -68,8 +68,8 @@ public class MainInteraction : MonoBehaviour
             {
                 //effectiveWidth = Vector3.Distance(allVariables.cursor.transform.position, allVariables.currentTarget.transform.position);
 
-                allVariables.errorCount =  allVariables.errorCount + 1;
-                allVariables.sfxPlaying.PlayWrong();
+                //allVariables.errorCount =  allVariables.errorCount + 1;
+                //allVariables.sfxPlaying.PlayWrong();
                 //TODO: Error
                 //
                 //}
