@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class AllVariables : MonoBehaviour
 {
- 
-    public DrawProjection drawProjectionWrist;
+
+    //Shukan did here
+    public  int remoteState = 1;
+
+    public  float TestX = -30f;
+    public  float TestY = 0.035f;
+    public  float TestZ = 0f;
+
+
+    public DrawProjection drawProjectionWrist; 
     public DrawProjection drawProjectionHead;
     public DrawProjection drawProjectionArm;
     public DrawProjection drawProjectionFinger;
@@ -46,6 +54,8 @@ public class AllVariables : MonoBehaviour
     public float effectiveWidth;
     public bool initialTouchDone;
     public float initialTouchTimer;
+
+
 
 
 

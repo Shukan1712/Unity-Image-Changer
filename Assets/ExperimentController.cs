@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class ExperimentController : MonoBehaviour
     public bool work = false;
 
     // Arrays for amplitudes and widths
-    public float[] amplitudeArray = { 0.1f, 0.2f, 0.05f };
+    public float[] amplitudeArray = { 0.05f, 0.1f, 0.03f };
     public float[] widthArray = { 0.01f,0.02f, 0.005f  };
     public GameObject screen;
     // List of center points
@@ -39,6 +40,11 @@ public class ExperimentController : MonoBehaviour
 
     private void Update()
     {
+        float extraX = 0f;
+        float extraY = 0f;
+        float extraZ = 0f;
+
+
         if (restart == true)
         {
             restart = false;
@@ -49,12 +55,31 @@ public class ExperimentController : MonoBehaviour
         if (work == true)
         {
 
+            
+
+            if (allVariables.remoteState == 1) // front palm
+            {
+
+                extraX = 0.071f;
+                extraY = 0.040f;
+                extraZ = 0.075f;
+
+            }
+            else if (allVariables.remoteState == 2) // back palm
+            {
+                extraX = 0.071f;
+                extraY = 0.055f;
+                extraZ = 0.071f;
+            }
+            else if (allVariables.remoteState == 3) //Hand
+            {
+                extraX = -0.071f;
+                extraY = 0.030f;
+                extraZ = -0.071f;
+            }
             Vector3 newposition = drawProjectionFinger.GetArmTransform().position;
-
-
-            screen.transform.position = new Vector3(newposition.x, newposition.y+0.035f, newposition.z); //sukhan change 
-
-
+            print(extraX);
+                screen.transform.position = new Vector3(newposition.x + extraX, newposition.y + extraY, newposition.z + extraZ); //sukhan change 
 
 
 
@@ -112,7 +137,23 @@ public class ExperimentController : MonoBehaviour
                     yield return new WaitForSeconds(0.2f);
                     fittsLawExperiment.AttachTargetsAsChildren();
                     yield return new WaitForSeconds(0.2f);
-                    screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+
+
+
+                    if (allVariables.remoteState==1)
+                    {
+                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                    }
+                    else if (allVariables.remoteState == 2)
+                    {
+                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                    }
+                    else if (allVariables.remoteState == 3)
+                    {
+                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                    }
+
+                  
                     yield return new WaitForSeconds(0.1f);
                     //yield return new WaitForSeconds(1f);
                     work = true;
