@@ -9,6 +9,9 @@ public class ExperimentController : MonoBehaviour
 {
    public FittsLawExperiment fittsLawExperiment;
     public AllVariables allVariables;
+    [SerializeField] private Transform wristTransform;
+
+
 
 
     public DrawProjection drawProjectionFinger;
@@ -82,6 +85,14 @@ public class ExperimentController : MonoBehaviour
                 screen.transform.position = new Vector3(newposition.x + extraX, newposition.y + extraY, newposition.z + extraZ); //sukhan change 
 
 
+            Vector3 newPosition = wristTransform.position;
+            Quaternion newRotation = wristTransform.rotation;
+
+            screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90,90,0);
+
+
+
+
 
         }
 
@@ -142,15 +153,15 @@ public class ExperimentController : MonoBehaviour
 
                     if (allVariables.remoteState==1)
                     {
-                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                        screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
                     }
                     else if (allVariables.remoteState == 2)
                     {
-                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                        screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
                     }
                     else if (allVariables.remoteState == 3)
                     {
-                        screen.transform.rotation = Quaternion.Euler(90, 0, 0); // sukhan change here 
+                        screen.transform.rotation = Quaternion.Euler(00, 0, 0); // sukhan change here 
                     }
 
                   
