@@ -62,10 +62,14 @@ public class ExperimentController : MonoBehaviour
 
             if (allVariables.remoteState == 1) // front palm
             {
-
+                // this sets x , y , z 
                 extraX = 0.071f;
                 extraY = 0.040f;
                 extraZ = 0.075f;
+
+                // this sets scale( Size)
+                screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
+
 
             }
             else if (allVariables.remoteState == 2) // back palm
@@ -73,13 +77,42 @@ public class ExperimentController : MonoBehaviour
                 extraX = 0.071f;
                 extraY = 0.055f;
                 extraZ = 0.071f;
+
+
+                // this sets scale( Size)
+                screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
+
             }
             else if (allVariables.remoteState == 3) //Hand
             {
                 extraX = -0.071f;
                 extraY = 0.030f;
                 extraZ = -0.071f;
+
+                // this sets scale( Size)
+                screen.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+
             }
+            else if (allVariables.remoteState == 4) // Stand screen in palm S
+            {
+
+                extraX = 0.041f;
+                extraY = 0.100f;
+                extraZ = 0.075f;
+
+                // this sets scale( Size)
+                screen.transform.localScale = new Vector3(0.1f, 0.1f, 0.00001f);
+
+
+            }
+
+
+
+
+
+
+
             Vector3 newposition = drawProjectionFinger.GetArmTransform().position;
             print(extraX);
                 screen.transform.position = new Vector3(newposition.x + extraX, newposition.y + extraY, newposition.z + extraZ); //sukhan change 
@@ -88,8 +121,15 @@ public class ExperimentController : MonoBehaviour
             Vector3 newPosition = wristTransform.position;
             Quaternion newRotation = wristTransform.rotation;
 
-            screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90,90,0);
 
+            if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3)
+            {
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
+            }
+            else if (allVariables.remoteState == 4)
+            {
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(0, 90, 0);
+            }
 
 
 
