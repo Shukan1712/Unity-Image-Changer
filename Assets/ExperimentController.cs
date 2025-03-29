@@ -12,7 +12,7 @@ public class ExperimentController : MonoBehaviour
     [SerializeField] private Transform wristTransform;
 
 
-
+    public int setcount = 0;
 
     public DrawProjection drawProjectionFinger;
 
@@ -21,7 +21,7 @@ public class ExperimentController : MonoBehaviour
     public bool work = false;
 
     // Arrays for amplitudes and widths
-    public float[] amplitudeArray = { 0.05f, 0.1f, 0.03f };
+    public float[] amplitudeArray = { 0.05f, 0.05f, 0.03f };
     public float[] widthArray = { 0.01f,0.02f, 0.005f  };
     public GameObject screen;
     // List of center points
@@ -60,41 +60,54 @@ public class ExperimentController : MonoBehaviour
 
             
 
-            if (allVariables.remoteState == 1) // front palm
+            if (allVariables.remoteState == 1) // front palm small
             {
                 // this sets x , y , z 
                 extraX = 0.071f;
                 extraY = 0.040f;
                 extraZ = 0.075f;
 
-                // this sets scale( Size)
+                // this sets scale( Size) of the screen 
                 screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
 
 
             }
-            else if (allVariables.remoteState == 2) // back palm
+            else if (allVariables.remoteState == 2) // front palm big 
             {
                 extraX = 0.071f;
                 extraY = 0.055f;
                 extraZ = 0.071f;
 
 
+                // this sets scale( Size) of the screen 
+                screen.transform.localScale = new Vector3(0.09f *2, 0.09f * 2, 0.000001f * 2);
+
+            }
+            else if (allVariables.remoteState == 3) //Hand small
+            {
+                extraX = -0.001f;
+                extraY = 0.025f;
+                extraZ = -0.051f;
+
                 // this sets scale( Size)
                 screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
+               // screen.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
 
             }
-            else if (allVariables.remoteState == 3) //Hand
+            else if (allVariables.remoteState == 4) // Hand Big
             {
-                extraX = -0.071f;
-                extraY = 0.030f;
-                extraZ = -0.071f;
+
+                extraX = -0.001f;
+                extraY = 0.025f;
+                extraZ = -0.051f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                screen.transform.localScale = new Vector3(0.09f * 2, 0.09f * 2, 0.000001f * 2);
 
 
             }
-            else if (allVariables.remoteState == 4) // Stand screen in palm S
+            else if (allVariables.remoteState == 5) 
             {
 
                 extraX = 0.041f;
@@ -122,13 +135,17 @@ public class ExperimentController : MonoBehaviour
             Quaternion newRotation = wristTransform.rotation;
 
 
-            if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3)
+            if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3 || allVariables.remoteState == 4)
             {
                 screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
             }
-            else if (allVariables.remoteState == 4)
+            else if (allVariables.remoteState == 5)
             {
                 screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(0, 90, 0);
+            }
+            else if (allVariables.remoteState == 6)
+            {
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
             }
 
 
@@ -184,8 +201,77 @@ public class ExperimentController : MonoBehaviour
                     //screen.transform.position = new Vector3(0.47f, 0,0);
                     screen.transform.position = new Vector3(0f, 0f, 0f);
                     yield return new WaitForSeconds(0.1f);
-                    fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
-                    yield return new WaitForSeconds(0.2f);
+
+
+
+
+
+
+                    if (allVariables.remoteState == 1 || allVariables.remoteState == 3) // remoteState 1 & 3 is small
+                    {
+                        // sets how much big the target will be...
+                        if (setcount == 0)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
+                            setcount++;
+                        }
+                        else if (setcount >= 1 && setcount < 6)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 3, width / 2, centerPosition);
+                            setcount++;
+                        }
+                        else
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 3, centerPosition);
+                            setcount++;
+                        }
+
+
+                    }
+                    else if (allVariables.remoteState == 2 || allVariables.remoteState == 4) // remoteState 2 & 4 is big
+                    {
+                        // sets how much big the target will be...
+                        if (setcount == 0)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
+                            setcount++;
+                        }
+                        else if (setcount >= 1 && setcount < 6)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 1, centerPosition);
+                            setcount++;
+                        }
+                        else
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 2, centerPosition);
+                            setcount++;
+                        }
+                    }
+                    else if (allVariables.remoteState == 5 || allVariables.remoteState == 6) // remoteState 5 & 6 is??
+                    {
+                        // sets how much big the target will be...
+                        if (setcount == 0)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
+                            setcount++;
+                        }
+                        else if (setcount >= 1 && setcount < 6)
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 1, centerPosition);
+                            setcount++;
+                        }
+                        else
+                        {
+                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 2, centerPosition);
+                            setcount++;
+                        }
+
+
+                    }
+
+                        // fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 2, centerPosition);
+
+                        yield return new WaitForSeconds(0.2f);
                     fittsLawExperiment.AttachTargetsAsChildren();
                     yield return new WaitForSeconds(0.2f);
 
