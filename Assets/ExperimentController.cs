@@ -21,8 +21,12 @@ public class ExperimentController : MonoBehaviour
     public bool work = false;
 
     // Arrays for amplitudes and widths
-    public float[] amplitudeArray = { 0.05f, 0.05f, 0.03f };
-    public float[] widthArray = { 0.01f,0.02f, 0.005f  };
+    //public float[] amplitudeArray = { 0.05f, 0.05f, 0.03f };
+    //public float[] widthArray = { 0.01f,0.02f, 0.005f  };
+
+    public float[] amplitudeArray = { 0.05f, 0.07f };
+    public float[] widthArray = { 0.01f, 0.015f  };
+
     public GameObject screen;
     // List of center points
     private List<Vector3> centerPoints = new List<Vector3>
@@ -113,6 +117,18 @@ public class ExperimentController : MonoBehaviour
                 extraX = 0.041f;
                 extraY = 0.100f;
                 extraZ = 0.075f;
+
+                // this sets scale( Size)
+                screen.transform.localScale = new Vector3(0.1f, 0.1f, 0.00001f);
+
+
+            }
+            else if (allVariables.remoteState == 6)
+            {
+
+                extraX = -0.071f;
+                extraY = 0.100f;
+                extraZ = -0.071f;
 
                 // this sets scale( Size)
                 screen.transform.localScale = new Vector3(0.1f, 0.1f, 0.00001f);
@@ -210,62 +226,20 @@ public class ExperimentController : MonoBehaviour
                     if (allVariables.remoteState == 1 || allVariables.remoteState == 3) // remoteState 1 & 3 is small
                     {
                         // sets how much big the target will be...
-                        if (setcount == 0)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
-                            setcount++;
-                        }
-                        else if (setcount >= 1 && setcount < 6)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 3, width / 2, centerPosition);
-                            setcount++;
-                        }
-                        else
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 3, centerPosition);
-                            setcount++;
-                        }
+                        fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
 
 
                     }
                     else if (allVariables.remoteState == 2 || allVariables.remoteState == 4) // remoteState 2 & 4 is big
                     {
                         // sets how much big the target will be...
-                        if (setcount == 0)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
-                            setcount++;
-                        }
-                        else if (setcount >= 1 && setcount < 6)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 1, centerPosition);
-                            setcount++;
-                        }
-                        else
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 2, centerPosition);
-                            setcount++;
-                        }
+                        fittsLawExperiment.ArrangeTargets(amplitude * 2, width * 2, centerPosition);
                     }
                     else if (allVariables.remoteState == 5 || allVariables.remoteState == 6) // remoteState 5 & 6 is??
                     {
                         // sets how much big the target will be...
-                        if (setcount == 0)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude, width / 2, centerPosition);
-                            setcount++;
-                        }
-                        else if (setcount >= 1 && setcount < 6)
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 1, centerPosition);
-                            setcount++;
-                        }
-                        else
-                        {
-                            fittsLawExperiment.ArrangeTargets(amplitude / 1, width / 2, centerPosition);
-                            setcount++;
-                        }
-
+                        fittsLawExperiment.ArrangeTargets(amplitude , width , centerPosition);
+                       
 
                     }
 
