@@ -24,8 +24,8 @@ public class ExperimentController : MonoBehaviour
     //public float[] amplitudeArray = { 0.05f, 0.05f, 0.03f };
     //public float[] widthArray = { 0.01f,0.02f, 0.005f  };
 
-    public float[] amplitudeArray = { 0.05f, 0.07f };
-    public float[] widthArray = { 0.01f, 0.015f  };
+    public float[] amplitudeArray = { 0.04f, 0.06f };
+    public float[] widthArray = { 0.005f, 0.015f  };
 
     public GameObject screen;
     // List of center points
@@ -68,19 +68,23 @@ public class ExperimentController : MonoBehaviour
             {
                 // this sets x , y , z 
                 extraX = 0.071f;
-                extraY = 0.040f;
-                extraZ = 0.075f;
+                extraY = 0.030f;
+                extraZ = 0.005f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.075f, 0.075f, 0.000001f);
 
 
             }
             else if (allVariables.remoteState == 2) // front palm big 
             {
+                //extraX = 0.071f;
+                //extraY = 0.055f;
+                //extraZ = 0.071f;
+
                 extraX = 0.071f;
-                extraY = 0.055f;
-                extraZ = 0.071f;
+                extraY = 0.030f;
+                extraZ = 0.005f;
 
 
                 // this sets scale( Size) of the screen 
@@ -141,14 +145,21 @@ public class ExperimentController : MonoBehaviour
 
 
 
-
             Vector3 newposition = drawProjectionFinger.GetArmTransform().position;
             print(extraX);
-                screen.transform.position = new Vector3(newposition.x + extraX, newposition.y + extraY, newposition.z + extraZ); //sukhan change 
+             //   screen.transform.position = new Vector3(newposition.x + extraX, newposition.y + extraY, newposition.z + extraZ); //sukhan change 
 
+
+
+            // Shukan Changed here
+            Vector3 offset = new Vector3(extraX, extraY, extraZ);
+            screen.transform.position = wristTransform.TransformPoint(offset);
+            // till here
 
             Vector3 newPosition = wristTransform.position;
             Quaternion newRotation = wristTransform.rotation;
+
+
 
 
             if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3 || allVariables.remoteState == 4)
@@ -199,105 +210,124 @@ public class ExperimentController : MonoBehaviour
         // Randomly shuffle the center points
         ShuffleList(centerPoints);
 
-        foreach (Vector3 centerPosition in centerPoints)
+
+        
+            foreach (Vector3 centerPosition in centerPoints)
         {
-            // Iterate over all combinations of amplitudes and widths
+
             foreach (float amplitude in amplitudeArray)
             {
+
+
                 foreach (float width in widthArray)
                 {
-                    work = false;
-                    // we need to detach all children from   the current gameobject   (if any)
-                    // Detach all children (if any)
-                    fittsLawExperiment.DetachAllChildren();
-                    yield return new WaitForSeconds(0.3f);
-                    
-                    //yield return new WaitForSeconds(1f);
-                    screen.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    //screen.transform.position = new Vector3(0.47f, 0,0);
-                    screen.transform.position = new Vector3(0f, 0f, 0f);
-                    yield return new WaitForSeconds(0.1f);
 
 
-
-
-
-
-                    if (allVariables.remoteState == 1 || allVariables.remoteState == 3) // remoteState 1 & 3 is small
+                    for (int i = 0; i < 2; i++)
                     {
-                        // sets how much big the target will be...
-                        fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
+                        Debug.Log($"Iteration: Amplitude={amplitude}, Width={width}, i={i}");
+
+                        // Iterate over all combinations of amplitudes and widths
 
 
-                    }
-                    else if (allVariables.remoteState == 2 || allVariables.remoteState == 4) // remoteState 2 & 4 is big
-                    {
-                        // sets how much big the target will be...
-                        fittsLawExperiment.ArrangeTargets(amplitude * 2, width * 2, centerPosition);
-                    }
-                    else if (allVariables.remoteState == 5 || allVariables.remoteState == 6) // remoteState 5 & 6 is??
-                    {
-                        // sets how much big the target will be...
-                        fittsLawExperiment.ArrangeTargets(amplitude , width , centerPosition);
-                       
 
-                    }
+
+
+
+
+                        work = false;
+                        // we need to detach all children from   the current gameobject   (if any)
+                        // Detach all children (if any)
+                        fittsLawExperiment.DetachAllChildren();
+                        yield return new WaitForSeconds(0.3f);
+
+                        //yield return new WaitForSeconds(1f);
+                        screen.transform.rotation = Quaternion.Euler(0, 0, 0);
+                        //screen.transform.position = new Vector3(0.47f, 0,0);
+                        screen.transform.position = new Vector3(0f, 0f, 0f);
+                        yield return new WaitForSeconds(0.1f);
+
+
+
+
+
+
+                        if (allVariables.remoteState == 1 || allVariables.remoteState == 3) // remoteState 1 & 3 is small
+                        {
+                            // sets how much big the target will be...
+                            fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
+
+
+                        }
+                        else if (allVariables.remoteState == 2 || allVariables.remoteState == 4) // remoteState 2 & 4 is big
+                        {
+                            // sets how much big the target will be...
+                            fittsLawExperiment.ArrangeTargets(amplitude * 2, width * 2, centerPosition);
+                        }
+                        else if (allVariables.remoteState == 5 || allVariables.remoteState == 6) // remoteState 5 & 6 is??
+                        {
+                            // sets how much big the target will be...
+                            fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
+
+
+                        }
 
                         // fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 2, centerPosition);
 
                         yield return new WaitForSeconds(0.2f);
-                    fittsLawExperiment.AttachTargetsAsChildren();
-                    yield return new WaitForSeconds(0.2f);
+                        fittsLawExperiment.AttachTargetsAsChildren();
+                        yield return new WaitForSeconds(0.2f);
 
 
 
-                    if (allVariables.remoteState==1)
-                    {
-                        screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
-                    }
-                    else if (allVariables.remoteState == 2)
-                    {
-                        screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
-                    }
-                    else if (allVariables.remoteState == 3)
-                    {
-                        screen.transform.rotation = Quaternion.Euler(00, 0, 0); // sukhan change here 
-                    }
-
-                  
-                    yield return new WaitForSeconds(0.1f);
-                    //yield return new WaitForSeconds(1f);
-                    work = true;
+                        if (allVariables.remoteState == 1)
+                        {
+                            screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
+                        }
+                        else if (allVariables.remoteState == 2)
+                        {
+                            screen.transform.rotation = Quaternion.Euler(0, 0, 0); // sukhan change here 
+                        }
+                        else if (allVariables.remoteState == 3)
+                        {
+                            screen.transform.rotation = Quaternion.Euler(00, 0, 0); // sukhan change here 
+                        }
 
 
-                   
-
+                        yield return new WaitForSeconds(0.1f);
+                        //yield return new WaitForSeconds(1f);
+                        work = true;
 
 
 
 
 
-                    // Reset the target selection sequence
-                    fittsLawExperiment.ResetTargetSequence();
 
-                    // Initialize the first target selection
-                    if (fittsLawExperiment.GetNextTarget())
-                    {
-                        // Activate or highlight the current target
-                        ActivateTarget(currentTargetNumber);
-                    }
 
-                    // Wait for the target selection sequence to complete
-                    while (!fittsLawExperiment.SequenceComplete)
-                    {
-                        yield return null;
-                    }
 
-                    // Optionally, collect and record data here
-                    // ...
 
-                    // Reset the scenario if needed
-                    //ResetScenario();
+                        // Reset the target selection sequence
+                        fittsLawExperiment.ResetTargetSequence();
+
+                        // Initialize the first target selection
+                        if (fittsLawExperiment.GetNextTarget())
+                        {
+                            // Activate or highlight the current target
+                            ActivateTarget(currentTargetNumber);
+                        }
+
+                        // Wait for the target selection sequence to complete
+                        while (!fittsLawExperiment.SequenceComplete)
+                        {
+                            yield return null;
+                        }
+
+                        // Optionally, collect and record data here
+                        // ...
+
+                        // Reset the scenario if needed
+                        //ResetScenario();
+                     }
                 }
             }
         }
