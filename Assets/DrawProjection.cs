@@ -31,9 +31,30 @@ public class DrawProjection : MonoBehaviour
     {
 
         Cursor.transform.position = GetIndexFingerTransform().position;
+        CheckFingerRaycast();
 
     }
 
+    void CheckFingerRaycast()
+    {
+        Transform fingerTip = GetIndexFingerTransform();
+        if (fingerTip == null) return;
+
+        Ray ray = new Ray(fingerTip.position, fingerTip.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 5f, CollidableLayes))
+        {
+            if (hit.transform.name == "NextButton")
+            {
+                FindObjectOfType<ExperimentController>().ShowNextMaterial();
+            }
+            else if (hit.transform.name == "PrevButton")
+            {
+                FindObjectOfType<ExperimentController>().ShowPreviousMaterial();
+            }
+        }
+    }
 
 
     private Transform GetIndexFingerTransform()

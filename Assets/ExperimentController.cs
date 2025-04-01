@@ -8,7 +8,18 @@ using UnityEngine;
 
 public class ExperimentController : MonoBehaviour
 {
-   public FittsLawExperiment fittsLawExperiment;
+
+
+    // SHukan chned here on 1st april
+
+    public Material[] materials;            // Assign these in Inspector
+    public Renderer screenRenderer;         // Assign your screen's MeshRenderer
+    private int currentMaterialIndex = 0;
+
+
+
+
+    public FittsLawExperiment fittsLawExperiment;
     public AllVariables allVariables;
     [SerializeField] private Transform wristTransform;
 
@@ -73,7 +84,7 @@ public class ExperimentController : MonoBehaviour
                 extraZ = 0.005f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.075f, 0.075f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.075f*1.5f, 0.075f, 0.000001f);
 
 
             }
@@ -166,7 +177,7 @@ public class ExperimentController : MonoBehaviour
 
             if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3 || allVariables.remoteState == 4)
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 90);
             }
             else if (allVariables.remoteState == 5)
             {
@@ -186,6 +197,22 @@ public class ExperimentController : MonoBehaviour
 
     }
 
+
+    // Shukan made this methods
+    public void ShowNextMaterial()
+    {
+        currentMaterialIndex = (currentMaterialIndex + 1) % materials.Length;
+        screenRenderer.material = materials[currentMaterialIndex];
+    }
+
+    public void ShowPreviousMaterial()
+    {
+        currentMaterialIndex = (currentMaterialIndex - 1 + materials.Length) % materials.Length;
+        screenRenderer.material = materials[currentMaterialIndex];
+    }
+
+
+    // till here
 
 
     void Start()
