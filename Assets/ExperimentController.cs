@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class ExperimentController : MonoBehaviour
     //public float[] widthArray = { 0.01f,0.02f, 0.005f  };
 
     public float[] amplitudeArray = { 0.04f, 0.06f };
-    public float[] widthArray = { 0.005f, 0.015f  };
+    public float[] widthArray = { 0.005f,0.010f  };
 
     public GameObject screen;
     // List of center points
@@ -55,7 +56,7 @@ public class ExperimentController : MonoBehaviour
         if (restart == true)
         {
             restart = false;
-            StartCoroutine(RunExperiment());
+            //StartCoroutine(RunExperiment());
             
         }
 
@@ -88,18 +89,19 @@ public class ExperimentController : MonoBehaviour
 
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.09f *2, 0.09f * 2, 0.000001f * 2);
+
+                screen.transform.localScale = new Vector3(0.075f *2 , 0.075f*2 , 0.000001f*2);
+               
 
             }
             else if (allVariables.remoteState == 3) //Hand small
             {
                 extraX = -0.001f;
                 extraY = 0.025f;
-                extraZ = -0.051f;
+                extraZ = -0.001f;
 
-                // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.09f, 0.09f, 0.000001f);
-               // screen.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                // this sets scale( Size) of the screen 
+                screen.transform.localScale = new Vector3(0.075f, 0.075f, 0.000001f);
 
 
             }
@@ -108,22 +110,22 @@ public class ExperimentController : MonoBehaviour
 
                 extraX = -0.001f;
                 extraY = 0.025f;
-                extraZ = -0.051f;
+                extraZ = -0.001f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.09f * 2, 0.09f * 2, 0.000001f * 2);
+                screen.transform.localScale = new Vector3(0.075f * 2, 0.075f * 2, 0.000001f * 2);
 
 
             }
             else if (allVariables.remoteState == 5) 
             {
 
-                extraX = 0.041f;
+                extraX = 0.091f;
                 extraY = 0.100f;
-                extraZ = 0.075f;
+                extraZ = 0.005f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.1f, 0.1f, 0.00001f);
+                screen.transform.localScale = new Vector3(0.075f * 2, 0.075f * 2, 0.000001f);
 
 
             }
@@ -131,11 +133,11 @@ public class ExperimentController : MonoBehaviour
             {
 
                 extraX = -0.071f;
-                extraY = 0.100f;
-                extraZ = -0.071f;
+                extraY = 0.060f;
+                extraZ = 0.101f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.1f, 0.1f, 0.00001f);
+                screen.transform.localScale = new Vector3(0.075f *2, 0.075f*2, 0.000001f);
 
 
             }
@@ -172,7 +174,7 @@ public class ExperimentController : MonoBehaviour
             }
             else if (allVariables.remoteState == 6)
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(45, 0, 0);
             }
 
 
@@ -189,7 +191,7 @@ public class ExperimentController : MonoBehaviour
     void Start()
     {
 
-        StartCoroutine(RunExperiment());
+       
         //resetScenario();
 
         // Arrange the targets around the circle
@@ -204,15 +206,17 @@ public class ExperimentController : MonoBehaviour
     }
 
 
-    IEnumerator RunExperiment()
+    public IEnumerator RunExperiment()
     {
         completed = false;
         // Randomly shuffle the center points
-        ShuffleList(centerPoints);
+        //ShuffleList(centerPoints);
+        Shuffle(amplitudeArray);
+        Shuffle(widthArray);
+        widthArray=  AddFloatAtStart(widthArray,0.0077f);
+        yield return new WaitForSeconds(2f);
 
-
-        
-            foreach (Vector3 centerPosition in centerPoints)
+        foreach (Vector3 centerPosition in centerPoints)
         {
 
             foreach (float amplitude in amplitudeArray)
@@ -245,7 +249,7 @@ public class ExperimentController : MonoBehaviour
                         screen.transform.rotation = Quaternion.Euler(0, 0, 0);
                         //screen.transform.position = new Vector3(0.47f, 0,0);
                         screen.transform.position = new Vector3(0f, 0f, 0f);
-                        yield return new WaitForSeconds(0.1f);
+                        yield return new WaitForSeconds(0.5f);
 
 
 
@@ -256,6 +260,7 @@ public class ExperimentController : MonoBehaviour
                         {
                             // sets how much big the target will be...
                             fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
+                            Debug.Log("Here Once 1");
 
 
                         }
@@ -263,18 +268,22 @@ public class ExperimentController : MonoBehaviour
                         {
                             // sets how much big the target will be...
                             fittsLawExperiment.ArrangeTargets(amplitude * 2, width * 2, centerPosition);
+                            Debug.Log("NOT Here Once 1");
                         }
                         else if (allVariables.remoteState == 5 || allVariables.remoteState == 6) // remoteState 5 & 6 is??
                         {
                             // sets how much big the target will be...
-                            fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition);
-
+                            fittsLawExperiment.ArrangeTargets(amplitude * 2, width * 2, centerPosition);
+                            Debug.Log("NOT Here Once 2");
 
                         }
 
-                        // fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 2, centerPosition);
+                        else { fittsLawExperiment.ArrangeTargets(amplitude, width, centerPosition); Debug.Log("NOT Here Once 3"); }
 
-                        yield return new WaitForSeconds(0.2f);
+
+                            // fittsLawExperiment.ArrangeTargets(amplitude / 2, width / 2, centerPosition);
+
+                            yield return new WaitForSeconds(0.2f);
                         fittsLawExperiment.AttachTargetsAsChildren();
                         yield return new WaitForSeconds(0.2f);
 
@@ -292,7 +301,7 @@ public class ExperimentController : MonoBehaviour
                         {
                             screen.transform.rotation = Quaternion.Euler(00, 0, 0); // sukhan change here 
                         }
-
+                        else screen.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                         yield return new WaitForSeconds(0.1f);
                         //yield return new WaitForSeconds(1f);
@@ -364,6 +373,39 @@ public class ExperimentController : MonoBehaviour
     }
 
 
+      void Shuffle( float[] array)
+    {
+        System.Random rnd = new System.Random();
+        int n = array.Length;
+
+        // Fisher-Yates shuffle
+        for (int i = n - 1; i > 0; i--)
+        {
+            // Pick a random index from 0 to i
+            int j = rnd.Next(i + 1);
+
+            // Swap array[i] with array[j]
+            float temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+
+
+
+    public  float[] AddFloatAtStart(float[] originalArray, float newValue)
+    {
+        float[] newArray = new float[originalArray.Length + 1];
+
+        // Place the new float at index 0
+        newArray[0] = newValue;
+
+        // Copy all elements of the original array starting from index 1
+        Array.Copy(originalArray, 0, newArray, 1, originalArray.Length);
+
+        return newArray;
+    }
 
 
 

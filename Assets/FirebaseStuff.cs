@@ -43,6 +43,7 @@ public class FirebaseStuff : MonoBehaviour
             int newState = int.Parse(args.Snapshot.Value.ToString());
             allVariables.remoteState = newState;
             Debug.Log("remoteState updated from Firebase: " + newState);
+            StartCoroutine(allVariables.experimentController. RunExperiment());
         }
     }
 
