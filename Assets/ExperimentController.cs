@@ -96,8 +96,8 @@ public class ExperimentController : MonoBehaviour
             }
             else if (allVariables.remoteState == 3) //Hand small
             {
-                extraX = -0.001f;
-                extraY = 0.025f;
+                extraX = -0.061f;
+                extraY =- 0.025f;
                 extraZ = -0.001f;
 
                 // this sets scale( Size) of the screen 
@@ -108,8 +108,8 @@ public class ExperimentController : MonoBehaviour
             else if (allVariables.remoteState == 4) // Hand Big
             {
 
-                extraX = -0.001f;
-                extraY = 0.025f;
+                extraX = -0.091f;
+                extraY = -0.035f;
                 extraZ = -0.001f;
 
                 // this sets scale( Size)
@@ -132,9 +132,9 @@ public class ExperimentController : MonoBehaviour
             else if (allVariables.remoteState == 6)
             {
 
-                extraX = -0.071f;
-                extraY = 0.060f;
-                extraZ = 0.101f;
+                extraX = -0.121f;
+                extraY = -0.120f;
+                extraZ = 0.011f;
 
                 // this sets scale( Size)
                 screen.transform.localScale = new Vector3(0.075f *2, 0.075f*2, 0.000001f);
@@ -174,7 +174,7 @@ public class ExperimentController : MonoBehaviour
             }
             else if (allVariables.remoteState == 6)
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(45, 0, 0);
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(-15, -15, 0);
             }
 
 
