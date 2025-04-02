@@ -88,7 +88,7 @@ public class ExperimentController : MonoBehaviour
                 extraZ = 0.005f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.060f*1.5f, 0.060f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.050f*1.5f, 0.060f, 0.000001f);
 
 
             }
@@ -105,7 +105,7 @@ public class ExperimentController : MonoBehaviour
 
                 // this sets scale( Size) of the screen 
 
-                screen.transform.localScale = new Vector3(0.060f * 1.5f, 0.060f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.050f * 1.5f, 0.060f, 0.000001f);
 
 
             }
@@ -116,7 +116,7 @@ public class ExperimentController : MonoBehaviour
                 extraZ = -0.001f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.060f * 1.5f, 0.060f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.050f * 1.5f, 0.060f, 0.000001f);
 
 
             }
