@@ -15,7 +15,10 @@ public class DrawProjection : MonoBehaviour
 
     public LayerMask CollidableLayes;
     // public DavidCustomGrabbingScript CGS;
-   
+
+
+    private float lastClickTime = 0f;
+    private float clickCooldown = 0.5f; // seconds
 
 
 
@@ -27,16 +30,20 @@ public class DrawProjection : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
 
         Cursor.transform.position = GetIndexFingerTransform().position;
+        
         CheckFingerRaycast();
+        
 
     }
 
     void CheckFingerRaycast()
     {
+        if (Time.time - lastClickTime < clickCooldown) return;
+
         Transform fingerTip = GetIndexFingerTransform();
         if (fingerTip == null) return;
 
@@ -48,16 +55,18 @@ public class DrawProjection : MonoBehaviour
             if (hit.transform.name == "NextButton")
             {
                 FindObjectOfType<ExperimentController>().ShowNextMaterial();
+                lastClickTime = Time.time;
             }
             else if (hit.transform.name == "PrevButton")
             {
                 FindObjectOfType<ExperimentController>().ShowPreviousMaterial();
+                lastClickTime = Time.time;
             }
         }
     }
 
 
-    private Transform GetIndexFingerTransform()
+    public Transform GetIndexFingerTransform()
     {
         foreach (var b in pointingHand.Bones)
         {
@@ -66,6 +75,18 @@ public class DrawProjection : MonoBehaviour
         return null;
     }
 
+
+    public Transform GetIndexFingerTransform(OVRSkeleton handSkeleton)
+    {
+        foreach (var bone in handSkeleton.Bones)
+        {
+            if (bone.Id == OVRSkeleton.BoneId.Hand_IndexTip)
+            {
+                return bone.Transform;
+            }
+        }
+        return null;
+    }
 
     public Transform GetArmTransform()
     {

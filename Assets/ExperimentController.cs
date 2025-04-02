@@ -22,6 +22,10 @@ public class ExperimentController : MonoBehaviour
     public FittsLawExperiment fittsLawExperiment;
     public AllVariables allVariables;
     [SerializeField] private Transform wristTransform;
+    [SerializeField] private Transform fingerTipTransform;
+    [SerializeField] private OVRSkeleton rightHandSkeleton;
+    [SerializeField] private OVRSkeleton leftHandSkeleton;
+
 
 
     public int setcount = 0;
@@ -84,7 +88,7 @@ public class ExperimentController : MonoBehaviour
                 extraZ = 0.005f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.075f*1.5f, 0.075f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.060f*1.5f, 0.060f, 0.000001f);
 
 
             }
@@ -95,48 +99,48 @@ public class ExperimentController : MonoBehaviour
                 //extraZ = 0.071f;
 
                 extraX = 0.071f;
-                extraY = 0.030f;
+                extraY = -0.035f;
                 extraZ = 0.005f;
 
 
                 // this sets scale( Size) of the screen 
 
-                screen.transform.localScale = new Vector3(0.075f *2 , 0.075f*2 , 0.000001f*2);
-               
+                screen.transform.localScale = new Vector3(0.060f * 1.5f, 0.060f, 0.000001f);
+
 
             }
             else if (allVariables.remoteState == 3) //Hand small
             {
-                extraX = -0.061f;
-                extraY =- 0.025f;
+                extraX = -0.041f;
+                extraY = 0.035f;
                 extraZ = -0.001f;
 
                 // this sets scale( Size) of the screen 
-                screen.transform.localScale = new Vector3(0.075f, 0.075f, 0.000001f);
+                screen.transform.localScale = new Vector3(0.060f * 1.5f, 0.060f, 0.000001f);
 
 
             }
             else if (allVariables.remoteState == 4) // Hand Big
             {
 
-                extraX = -0.091f;
-                extraY = -0.035f;
+                extraX = -0.031f;
+                extraY = -0.045f;
                 extraZ = -0.001f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.075f * 2, 0.075f * 2, 0.000001f * 2);
+                screen.transform.localScale = new Vector3(0.065f * 1.5f, 0.065f, 0.000001f);
 
 
             }
             else if (allVariables.remoteState == 5) 
             {
 
-                extraX = 0.091f;
-                extraY = 0.100f;
-                extraZ = 0.005f;
+                extraX = -0.07f;
+                extraY = 0.00f;
+                extraZ = -0.010f;
 
                 // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.075f * 2, 0.075f * 2, 0.000001f);
+                screen.transform.localScale = new Vector3(0.065f * 1.5f, 0.065f, 0.000001f);
 
 
             }
@@ -169,19 +173,35 @@ public class ExperimentController : MonoBehaviour
             screen.transform.position = wristTransform.TransformPoint(offset);
             // till here
 
+
+
+            if(allVariables.remoteState == 5)
+            {
+                Transform leftIndexTipTransform = drawProjectionFinger.GetIndexFingerTransform(leftHandSkeleton);
+                // Apply the offset relative to the finger tip's local space
+                screen.transform.position = leftIndexTipTransform.TransformPoint(offset);
+                screen.transform.rotation = fingerTipTransform.rotation * Quaternion.Euler(-90, 0, 0);
+            }
+            else
+            {
+                // For other states, use the wrist transform offset as before
+                screen.transform.position = wristTransform.TransformPoint(offset);
+            }
+
             Vector3 newPosition = wristTransform.position;
             Quaternion newRotation = wristTransform.rotation;
 
 
 
 
-            if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3 || allVariables.remoteState == 4)
+            if (allVariables.remoteState == 1|| allVariables.remoteState == 2|| allVariables.remoteState == 3 || allVariables.remoteState == 4 )
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 90);
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(-90, 90, 90);
             }
-            else if (allVariables.remoteState == 5)
+            else if (allVariables.remoteState == 6)
             {
                 screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(0, 90, 0);
+                
             }
             else if (allVariables.remoteState == 6)
             {
