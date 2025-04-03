@@ -147,12 +147,28 @@ public class ExperimentController : MonoBehaviour
             else if (allVariables.remoteState == 6)
             {
 
-                extraX = -0.121f;
-                extraY = -0.120f;
-                extraZ = 0.011f;
+                extraX = 0.071f;
+                extraY = -0.035f;
+                extraZ = 0.165f;
 
-                // this sets scale( Size)
-                screen.transform.localScale = new Vector3(0.075f *2, 0.075f*2, 0.000001f);
+
+                // this sets scale( Size) of the screen 
+
+                screen.transform.localScale = new Vector3(0.050f * 1.5f, 0.060f, 0.000001f);
+
+
+            }
+            else if (allVariables.remoteState == 7)
+            {
+
+                extraX = 0.071f;
+                extraY = -0.035f;
+                extraZ = 0.325f;
+
+
+                // this sets scale( Size) of the screen 
+
+                screen.transform.localScale = new Vector3(0.050f * 1.5f, 0.060f, 0.000001f);
 
 
             }
@@ -180,7 +196,7 @@ public class ExperimentController : MonoBehaviour
                 Transform leftIndexTipTransform = drawProjectionFinger.GetIndexFingerTransform(leftHandSkeleton);
                 // Apply the offset relative to the finger tip's local space
                 screen.transform.position = leftIndexTipTransform.TransformPoint(offset);
-                screen.transform.rotation = fingerTipTransform.rotation * Quaternion.Euler(-90, 0, 0);
+                screen.transform.rotation = fingerTipTransform.rotation * Quaternion.Euler(90, 180, 0);
             }
             else
             {
@@ -198,14 +214,19 @@ public class ExperimentController : MonoBehaviour
             {
                 screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(-90, 90, 90);
             }
-            else if (allVariables.remoteState == 6)
+            else if (allVariables.remoteState == 5)
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(0, 90, 0);
-                
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 180, 0);
+                //screen.transform.rotation = fingerTipTransform.rotation * Quaternion.Euler(90, 180, 0);
+
             }
             else if (allVariables.remoteState == 6)
             {
-                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(-15, -15, 0);
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
+            }
+            else if (allVariables.remoteState == 7)
+            {
+                screen.transform.rotation = wristTransform.rotation * Quaternion.Euler(90, 90, 0);
             }
 
 
