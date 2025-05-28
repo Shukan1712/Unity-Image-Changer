@@ -38,10 +38,15 @@ The system is designed to:
 
 Assets/
 ├── Scripts/ → Core logic and Fitts’ Law calculations
+
 ├── UI/ → User interface components
+
 ├── Scenes/ → Unity scenes for experimentation
+
 ProjectSettings/ → Unity configuration
+
 UserSettings/ → Per-user Unity settings
+
 Packages/ → Unity dependencies
 
 
