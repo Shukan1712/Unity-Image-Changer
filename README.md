@@ -8,7 +8,8 @@ This project was developed as part of a Human-Computer Interaction (HCI) researc
 
 ## 🎬 Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/GeypuzNrZQk/0.jpg)](https://youtube.com/shorts/GeypuzNrZQk)
+[![Watch the demo](https://img.youtube.com/vi/9mmgIR1pBxc/0.jpg)](https://youtu.be/9mmgIR1pBxc)
+
 
 ---
 
