@@ -1,5 +1,4 @@
 # Unity-Image-Change
 
 ## 🔗 Repository Link
-
-[Unity-Image-Changer (Main Branch)]([https://github.com/Shukan1712/Unity-Image-Changer.git])
+[![View on GitHub](https://img.shields.io/badge/GitHub-Unity--Image--Changer-blue?logo=github)](https://github.com/Shukan1712/Unity-Image-Changer/tree/Image_Chnager)
