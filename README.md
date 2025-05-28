@@ -5,9 +5,10 @@ This project was developed as part of a Human-Computer Interaction (HCI) researc
 ---
 
 
-## 📷 Screenshots / Demo
 
-> _(Optional section – add screenshots, GIFs, or demo video links if available)_
+## 🎬 Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/GeypuzNrZQk/0.jpg)](https://youtube.com/shorts/GeypuzNrZQk)
 
 ---
 
